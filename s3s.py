@@ -32,7 +32,7 @@ try:
 	config_file.close()
 except (IOError, ValueError):
 	print("Generating new config file.")
-	CONFIG_DATA = {"api_key": "", "acc_loc": "", "gtoken": "", "bullettoken": "", "session_token": "", "f_gen": "https://api.imink.app/f"}
+	CONFIG_DATA = {"api_key": os.environ["API_KEY"], "acc_loc": os.environ["ACC_LOC"], "gtoken": os.environ["GTOKEN"], "bullettoken": os.environ["BULLETTOKEN"], "session_token": os.environ["SESSION_TOKEN"], "f_gen": "https://api.imink.app/f"}
 	config_file = open(config_path, "w")
 	config_file.seek(0)
 	config_file.write(json.dumps(CONFIG_DATA, indent=4, sort_keys=False, separators=(',', ': ')))

@@ -1,0 +1,36 @@
+name: run s3s.py
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/30 * * * *' # At every 30th minute.
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: checkout repo content
+        uses: actions/checkout@v2 # checkout the repository content to github runner
+        
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.7' # install the python version needed
+          cache: 'pip' # caching pip dependencies
+          
+      - name: install python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: execute py script # run s3s.py
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          ACC_LOC: ${{ secrets.ACC_LOC }}
+          GTOKEN: ${{ secrets.GTOKEN }}
+          BULLETTOKEN: ${{ secrets.BULLETTOKEN }}
+          SESSION_TOKEN: ${{ secrets.SESSION_TOKEN }}
+          F_GEN: ${{ secrets.F_GEN }}
+        run: python s3s.py -r
