@@ -1,4 +1,4 @@
-name: run s3s.py
+name: Run s3s.py
 
 on:
   workflow_dispatch:
