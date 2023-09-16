@@ -3,7 +3,7 @@ name: Run s3s.py
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/30 * * * *' # At every 30th minute.
+    - cron: '17 13,23 * * *' # At minute 17 past hour 13 and 23.
 
 jobs:
   build:
